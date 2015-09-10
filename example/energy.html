@@ -41,12 +41,13 @@
 
     <script>
       d3.json("data/energy.json", function(error, json) {
-        var chart = d3.select("#chart").append("svg").chart('Sankey');
+        var chart = d3.select("#chart").append("svg").chart('Sankey'),
+            color = d3.scale.category20();
 
         chart
           .nodeWidth(15)
           .nodePadding(10)
-          .colorNodes(d3.scale.category20())
+          .colorNodes(function(name) { return color(name.replace(/ .*/, "")); })
           .draw(json);
       });
     </script>
