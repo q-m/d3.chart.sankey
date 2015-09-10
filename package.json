@@ -1,0 +1,57 @@
+{
+  "name": "d3.chart.sankey",
+  "description": "Reusable D3 Sankey diagram using d3.Chart",
+  "version": "0.1.0",
+
+  "main": "./d3.chart.sankey.js",
+  "license": "MIT",
+
+  "keywords": [
+    "d3.js",
+    "d3.chart",
+    "visualization",
+    "sankey"
+  ],
+
+  "homepage": "https://github.com/q-m/d3.chart.sankey/",
+  "author": "wvengen <dev-js@willem.engen.nl>",
+
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/q-m/d3.chart.sankey.git"
+  },
+
+  "bugs": {
+    "url": "https://github.com/q-m/d3.chart.sankey/issues"
+  },
+  
+  "directories": {
+    "example": "./example"
+  },
+
+  "dependencies": {
+    "d3": "3",
+    "d3-plugins-sankey": "1.2.1"
+  },
+
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-jshint": "^0.11.1",
+    "grunt-contrib-uglify": "^0.8.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "vows": "^0.8.1"
+  },
+
+  "peerDependencies": {
+    "grunt": "~0.4.0"
+  },
+
+  "scripts": {
+    "test": "vows --spec"
+  },
+ 
+  "d3.chart": {
+    "version" : "0.2.1"
+  }
+}
