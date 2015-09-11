@@ -4,6 +4,8 @@ d3.chart.sankey
 Reusable [D3](http://d3js.org/) Sankey [diagram](https://www.npmjs.com/package/d3-plugins-sankey)
 using [d3.Chart](http://misoproject.com/d3-chart/).
 
+Demo: [energy](http://bl.ocks.org/7317daa451384dbcefe6) and [product](http://bl.ocks.org/cab9b01816490edb7083).
+
 ## Usage
 
 Include `d3`, `sankey` and `d3.chart` before `d3.chart.sankey`:
