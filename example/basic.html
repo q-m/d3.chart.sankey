@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Energy Sankey Example</title>
+    <title>Basic Sankey Example</title>
     <script src="../bower_components/d3/d3.js"></script>
     <script src="../bower_components/d3-plugins-sankey/sankey.js"></script>
     <script src="../bower_components/d3.chart/d3.chart.js"></script>
@@ -11,7 +11,6 @@
       body {
         width: 960px;
         margin: auto;
-        font: 10px sans-serif;
       }
 
       #chart {
@@ -24,7 +23,6 @@
         shape-rendering: crispEdges;
       }
       .node text {
-        pointer-events: none;
         text-shadow: 0 1px 0 #fff;
       }
 
@@ -33,28 +31,20 @@
         stroke: #000;
         stroke-opacity: .2;
       }
-      .link:hover {
-        stroke-opacity: .5;
-      }
     </style>
   </head>
   <body>
-    <h1>Energy Sankey Diagram</h1>
+    <h1>Basic Sankey Diagram</h1>
 
     <div id="chart"></div>
 
-    <p>D3's prime Sankey example <a href="http://bost.ocks.org/mike/sankey/">from Mike Bostock</a>.</p>
+    <p>A basic Sankey diagram without interaction.</p>
 
     <script>
-      d3.json("data/energy.json", function(error, json) {
-        var chart = d3.select("#chart").append("svg").chart('Sankey'),
-            color = d3.scale.category20();
+      d3.json("data/foo.json", function(error, json) {
+        var chart = d3.select("#chart").append("svg").chart("Sankey");
 
-        chart
-          .nodeWidth(15)
-          .nodePadding(10)
-          .colorNodes(function(name) { return color(name.replace(/ .*/, "")); })
-          .draw(json);
+        chart.draw(json);
       });
     </script>
   </body>

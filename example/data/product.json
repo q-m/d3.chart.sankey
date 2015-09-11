@@ -1,0 +1,630 @@
+{
+   "nodes" : [
+      {
+         "name" : "Total",
+         "id" : "final_score"
+      },
+      {
+         "name" : "Environment",
+         "id" : "environment_score"
+      },
+      {
+         "name" : "Land use",
+         "id" : "land_use_score"
+      },
+      {
+         "id" : "research_ingredient_177",
+         "name" : "Cocoa butter (Organic)"
+      },
+      {
+         "name" : "Cocoa mass (Organic)",
+         "id" : "research_ingredient_190"
+      },
+      {
+         "name" : "Hazelnuts (Organic)",
+         "id" : "research_ingredient_228"
+      },
+      {
+         "name" : "Cane sugar (Organic)",
+         "id" : "research_ingredient_283"
+      },
+      {
+         "name" : "Vegetables (Organic)",
+         "id" : "research_ingredient_272"
+      },
+      {
+         "name" : "Climate change",
+         "id" : "climate_change_score"
+      },
+      {
+         "id" : "harmful_substances_score",
+         "name" : "Harmful substances"
+      },
+      {
+         "name" : "Water use ",
+         "id" : "water_use_score"
+      },
+      {
+         "id" : "resource_depletion_score",
+         "name" : "Resource depletion"
+      },
+      {
+         "name" : "Refrigeration",
+         "id" : "refrigeration_score"
+      },
+      {
+         "name" : "Packaging",
+         "id" : "package_score"
+      },
+      {
+         "id" : "social_score",
+         "name" : "Human rights"
+      },
+      {
+         "name" : "Child labour",
+         "id" : "child_score"
+      },
+      {
+         "id" : "research_ingredient_238",
+         "name" : "Coconut oil (Organic)"
+      },
+      {
+         "id" : "forced_score",
+         "name" : "Forced labour"
+      },
+      {
+         "id" : "health_safety_score",
+         "name" : "Health safety"
+      },
+      {
+         "name" : "Access to water",
+         "id" : "water_score"
+      },
+      {
+         "id" : "association_score",
+         "name" : "Freedom of association"
+      },
+      {
+         "id" : "land_score",
+         "name" : "Access to land"
+      },
+      {
+         "id" : "wage_score",
+         "name" : "Sufficient wage"
+      },
+      {
+         "name" : "Equal rights migrants",
+         "id" : "migrant_score"
+      },
+      {
+         "id" : "discrimination_score",
+         "name" : "Discrimination"
+      },
+      {
+         "id" : "hours_score",
+         "name" : "Working hours"
+      }
+   ],
+   "links" : [
+      {
+         "source" : 0,
+         "value" : 0.342284047256003,
+         "target" : 1
+      },
+      {
+         "value" : 0.32322870366987,
+         "source" : 1,
+         "target" : 2
+      },
+      {
+         "value" : 0.177682517071359,
+         "source" : 2,
+         "target" : 3
+      },
+      {
+         "value" : 0.137241325342711,
+         "source" : 2,
+         "target" : 4
+      },
+      {
+         "source" : 2,
+         "value" : 0.00433076373512774,
+         "target" : 5
+      },
+      {
+         "target" : 6,
+         "value" : 0.00296956039863467,
+         "source" : 2
+      },
+      {
+         "target" : 7,
+         "value" : 0.00100453712203756,
+         "source" : 2
+      },
+      {
+         "target" : 8,
+         "value" : 0.0112886157414413,
+         "source" : 1
+      },
+      {
+         "source" : 8,
+         "value" : 0.00676852971933996,
+         "target" : 3
+      },
+      {
+         "target" : 4,
+         "value" : 0.00394686874786743,
+         "source" : 8
+      },
+      {
+         "value" : 0.000315972058711838,
+         "source" : 8,
+         "target" : 6
+      },
+      {
+         "value" : 0.000218969462265292,
+         "source" : 8,
+         "target" : 5
+      },
+      {
+         "source" : 8,
+         "value" : 3.82757532567656e-05,
+         "target" : 7
+      },
+      {
+         "value" : 0.00604275542495656,
+         "source" : 1,
+         "target" : 9
+      },
+      {
+         "source" : 9,
+         "value" : 0.0055125989240741,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "source" : 9,
+         "value" : 0.000330017607892127
+      },
+      {
+         "source" : 9,
+         "value" : 0.000200138892990337,
+         "target" : 6
+      },
+      {
+         "value" : 0,
+         "source" : 9,
+         "target" : 5
+      },
+      {
+         "source" : 9,
+         "value" : 0,
+         "target" : 7
+      },
+      {
+         "source" : 1,
+         "value" : 0.00148345269044703,
+         "target" : 10
+      },
+      {
+         "source" : 10,
+         "value" : 0.00135309891304186,
+         "target" : 3
+      },
+      {
+         "target" : 4,
+         "source" : 10,
+         "value" : 0.000105714137908639
+      },
+      {
+         "source" : 10,
+         "value" : 1.33452642581887e-05,
+         "target" : 5
+      },
+      {
+         "target" : 6,
+         "source" : 10,
+         "value" : 8.78074837009238e-06
+      },
+      {
+         "target" : 7,
+         "value" : 2.5136268682477e-06,
+         "source" : 10
+      },
+      {
+         "source" : 1,
+         "value" : 0.000240519729288764,
+         "target" : 11
+      },
+      {
+         "value" : 0.000226237279345084,
+         "source" : 11,
+         "target" : 6
+      },
+      {
+         "target" : 7,
+         "source" : 11,
+         "value" : 1.42824499436793e-05
+      },
+      {
+         "target" : 5,
+         "source" : 11,
+         "value" : 0
+      },
+      {
+         "source" : 11,
+         "value" : 0,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "value" : 0,
+         "source" : 11
+      },
+      {
+         "target" : 12,
+         "source" : 1,
+         "value" : 0
+      },
+      {
+         "source" : 1,
+         "value" : 0,
+         "target" : 13
+      },
+      {
+         "target" : 14,
+         "source" : 0,
+         "value" : 0.307574096993239
+      },
+      {
+         "target" : 15,
+         "value" : 0.0410641202645833,
+         "source" : 14
+      },
+      {
+         "target" : 5,
+         "source" : 15,
+         "value" : 0.0105339381639722
+      },
+      {
+         "value" : 0.0105,
+         "source" : 15,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "source" : 15,
+         "value" : 0.0087294420777
+      },
+      {
+         "value" : 0.00474399974233333,
+         "source" : 15,
+         "target" : 16
+      },
+      {
+         "target" : 6,
+         "value" : 0.00388226450884445,
+         "source" : 15
+      },
+      {
+         "target" : 7,
+         "source" : 15,
+         "value" : 0.00267447577173333
+      },
+      {
+         "value" : 0.0365458590642445,
+         "source" : 14,
+         "target" : 17
+      },
+      {
+         "target" : 5,
+         "value" : 0.0114913076376389,
+         "source" : 17
+      },
+      {
+         "target" : 3,
+         "source" : 17,
+         "value" : 0.0081134807347
+      },
+      {
+         "source" : 17,
+         "value" : 0.00765230236575,
+         "target" : 4
+      },
+      {
+         "target" : 6,
+         "value" : 0.004,
+         "source" : 17
+      },
+      {
+         "source" : 17,
+         "value" : 0.00296668823626667,
+         "target" : 7
+      },
+      {
+         "target" : 16,
+         "value" : 0.00232208008988889,
+         "source" : 17
+      },
+      {
+         "value" : 0.0345435327843611,
+         "source" : 14,
+         "target" : 18
+      },
+      {
+         "source" : 18,
+         "value" : 0.0121419536385,
+         "target" : 5
+      },
+      {
+         "source" : 18,
+         "value" : 0.00766772850678333,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "source" : 18,
+         "value" : 0.0056245892061
+      },
+      {
+         "value" : 0.00361616847688889,
+         "source" : 18,
+         "target" : 16
+      },
+      {
+         "source" : 18,
+         "value" : 0.00277374682533333,
+         "target" : 6
+      },
+      {
+         "source" : 18,
+         "value" : 0.00271934613075556,
+         "target" : 7
+      },
+      {
+         "target" : 19,
+         "source" : 14,
+         "value" : 0.0340206659360667
+      },
+      {
+         "source" : 19,
+         "value" : 0.0105,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "source" : 19,
+         "value" : 0.0089274160792
+      },
+      {
+         "value" : 0.0054148022845,
+         "source" : 19,
+         "target" : 5
+      },
+      {
+         "source" : 19,
+         "value" : 0.00333938149786667,
+         "target" : 6
+      },
+      {
+         "value" : 0.00314663377488889,
+         "source" : 19,
+         "target" : 7
+      },
+      {
+         "target" : 16,
+         "source" : 19,
+         "value" : 0.00269243229961111
+      },
+      {
+         "source" : 14,
+         "value" : 0.0320571523941667,
+         "target" : 20
+      },
+      {
+         "value" : 0.0132312483463611,
+         "source" : 20,
+         "target" : 5
+      },
+      {
+         "target" : 3,
+         "source" : 20,
+         "value" : 0.0077695200707
+      },
+      {
+         "value" : 0.00510606573995,
+         "source" : 20,
+         "target" : 4
+      },
+      {
+         "target" : 7,
+         "value" : 0.00354321156324444,
+         "source" : 20
+      },
+      {
+         "target" : 6,
+         "value" : 0.00240710667391111,
+         "source" : 20
+      },
+      {
+         "target" : 16,
+         "source" : 20,
+         "value" : 0
+      },
+      {
+         "target" : 21,
+         "value" : 0.0315022209894056,
+         "source" : 14
+      },
+      {
+         "target" : 5,
+         "value" : 0.00964970063322223,
+         "source" : 21
+      },
+      {
+         "value" : 0.00938530207965,
+         "source" : 21,
+         "target" : 4
+      },
+      {
+         "target" : 3,
+         "source" : 21,
+         "value" : 0.0060110791848
+      },
+      {
+         "value" : 0.00380818314608889,
+         "source" : 21,
+         "target" : 6
+      },
+      {
+         "target" : 7,
+         "value" : 0.00264795594564445,
+         "source" : 21
+      },
+      {
+         "target" : 16,
+         "value" : 0,
+         "source" : 21
+      },
+      {
+         "source" : 14,
+         "value" : 0.0287776757227333,
+         "target" : 22
+      },
+      {
+         "target" : 4,
+         "value" : 0.00883512456493333,
+         "source" : 22
+      },
+      {
+         "source" : 22,
+         "value" : 0.0078343367268,
+         "target" : 3
+      },
+      {
+         "target" : 16,
+         "source" : 22,
+         "value" : 0.00347879026511111
+      },
+      {
+         "target" : 5,
+         "source" : 22,
+         "value" : 0.00316254211388889
+      },
+      {
+         "target" : 7,
+         "value" : 0.00281013722808889,
+         "source" : 22
+      },
+      {
+         "target" : 6,
+         "source" : 22,
+         "value" : 0.00265674482391111
+      },
+      {
+         "target" : 23,
+         "source" : 14,
+         "value" : 0.0271146645119444
+      },
+      {
+         "target" : 3,
+         "source" : 23,
+         "value" : 0.0071042315061
+      },
+      {
+         "target" : 4,
+         "source" : 23,
+         "value" : 0.00636673210005
+      },
+      {
+         "target" : 5,
+         "source" : 23,
+         "value" : 0.00601459775836111
+      },
+      {
+         "target" : 16,
+         "source" : 23,
+         "value" : 0.00429185583138889
+      },
+      {
+         "value" : 0.00182647471915556,
+         "source" : 23,
+         "target" : 6
+      },
+      {
+         "target" : 7,
+         "source" : 23,
+         "value" : 0.00151077259688889
+      },
+      {
+         "target" : 24,
+         "value" : 0.0211217763359833,
+         "source" : 14
+      },
+      {
+         "target" : 4,
+         "source" : 24,
+         "value" : 0.00609671700306667
+      },
+      {
+         "target" : 3,
+         "source" : 24,
+         "value" : 0.0047738806325
+      },
+      {
+         "target" : 16,
+         "source" : 24,
+         "value" : 0.00368119084494444
+      },
+      {
+         "value" : 0.00286009813604444,
+         "source" : 24,
+         "target" : 7
+      },
+      {
+         "target" : 6,
+         "source" : 24,
+         "value" : 0.00283706180951111
+      },
+      {
+         "target" : 5,
+         "source" : 24,
+         "value" : 0.000872827909916666
+      },
+      {
+         "source" : 14,
+         "value" : 0.02082642898975,
+         "target" : 25
+      },
+      {
+         "target" : 5,
+         "value" : 0.0107216773848333,
+         "source" : 25
+      },
+      {
+         "source" : 25,
+         "value" : 0.00359009052944444,
+         "target" : 16
+      },
+      {
+         "value" : 0.00212300379075556,
+         "source" : 25,
+         "target" : 7
+      },
+      {
+         "source" : 25,
+         "value" : 0.0018518584356,
+         "target" : 3
+      },
+      {
+         "target" : 4,
+         "value" : 0.00158227069058333,
+         "source" : 25
+      },
+      {
+         "target" : 6,
+         "value" : 0.000957528158533333,
+         "source" : 25
+      }
+   ]
+}
