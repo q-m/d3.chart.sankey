@@ -96,6 +96,7 @@ d3.chart("Sankey.Base").extend("Sankey", {
     chart.d3.path = chart.d3.sankey.link();
     chart.d3.sankey.size([chart.features.width, chart.features.height]);
 
+    chart.features.spread = false;
     chart.features.iterations = 32;
     chart.features.nodeWidth = chart.d3.sankey.nodeWidth();
     chart.features.nodePadding = chart.d3.sankey.nodePadding();
@@ -198,6 +199,8 @@ d3.chart("Sankey.Base").extend("Sankey", {
       .links(data.links)
       .layout(chart.features.iterations);
 
+    if (this.features.spread) { this._spreadNodes(data); }
+
     return data;
   },
 
@@ -232,6 +235,38 @@ d3.chart("Sankey.Base").extend("Sankey", {
 
     return this;
   },
+
+
+  spread: function(_) {
+    if (!arguments.length) { return this.features.spread; }
+    this.features.spread = _;
+
+    if (this.data) { this.draw(this.data); }
+
+    return this;
+  },
+
+
+  _spreadNodes: function(data) {
+    var chart = this,
+        nodesByBreadth = d3.nest()
+        .key(function(d) { return d.x; })
+        .entries(data.nodes)
+        .map(function(d) { return d.values; });
+
+    nodesByBreadth.forEach(function(nodes) {
+      var i,
+          node,
+          sum = d3.sum(nodes, function(o) { return o.dy; }),
+          padding = (chart.features.height - sum) / nodes.length,
+          y0 = 0;
+      for (i = 0; i < nodes.length; ++i) {
+        node = nodes[i];
+        node.y = y0;
+        y0 += node.dy + padding;
+      }
+    });
+  }
 
 });
 

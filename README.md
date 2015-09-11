@@ -26,6 +26,7 @@ chart
   .nodeWidth(24)    // width of node
   .nodePadding(8)   // vertical space between nodes
   .iterations(32)   // number of layout iterations
+  .spread(false)    // whether to spread nodes vertically after layout
   .name(function(n) { return n.name; })               // node label
   .colorNodes('red')                                  // color for nodes
   .colorNodes(d3.chart.category20c())                 // ... or a color scale
@@ -33,6 +34,10 @@ chart
   .colorLinks('yellow')                               // color for labels
   .colorLinks(function(link) { /* ... */ });          // ... or a function
 ```
+
+The _spread_ option does not exist in D3's Sankey plugin and can make some
+diagrams clearer. When enabled, nodes are distributed over the full height.
+This may work best when the number of iterations is set to zero.
 
 The following events are emitted on the chart:
 `node:mouseover`, `node:mouseout`, `node:click`,
