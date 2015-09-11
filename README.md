@@ -8,9 +8,9 @@ using [d3.Chart](http://misoproject.com/d3-chart/).
 
 Include `d3`, `sankey` and `d3.chart` before `d3.chart.sankey`:
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
-<script src="https://raw.githubusercontent.com/newrelic-forks/d3-plugins-sankey/v1.1.0/sankey.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/d3.chart/0.2.1/d3.chart.min.js"></script>
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+<script src="https://rawgit.com/newrelic-forks/d3-plugins-sankey/v1.1.0/sankey.js"></script>
+<script src="https://rawgit.com/misoproject/d3.chart/master/d3.chart.min.js"></script>
 <script src="d3.chart.sankey.min.js"></script>
 ```
 
