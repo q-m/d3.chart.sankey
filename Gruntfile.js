@@ -61,6 +61,8 @@ module.exports = function(grunt) {
             "src/wrapper/start.frag",
             "src/base.js",
             "src/sankey.js",
+            "src/selection.js",
+            "src/path.js",
             "src/wrapper/end.frag"
           ]
         }

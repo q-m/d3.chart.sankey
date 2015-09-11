@@ -26,6 +26,7 @@
         stroke-width: 0;
       }
       .node text {
+        pointer-events: none;
         text-shadow: 0 1px 0 #fff;
       }
 
@@ -55,7 +56,7 @@
           };
 
       d3.json("data/product.json", function(error, json) {
-        var chart = d3.select("#chart").append("svg").chart("Sankey");
+        var chart = d3.select("#chart").append("svg").chart("Sankey.Path");
 
         chart
           .name(label)

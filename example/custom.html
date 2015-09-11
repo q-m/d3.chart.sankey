@@ -70,6 +70,14 @@
         <label for="spread">spread</label>
         <input type="checkbox" id="spread" value="1">
       </div>
+      <div class="control">
+        <label for="type">Chart</label>
+        <select id="type">
+          <option>Sankey</option>
+          <option>Sankey.Selection</option>
+          <option>Sankey.Path</option>
+        </select>
+      </div>
     </div>
 
     <div id="chart"></div>
@@ -77,11 +85,12 @@
     <p>A Sankey diagram to fiddle with.</p>
 
     <script>
-      var chart = d3.select("#chart").append("svg").chart("Sankey"),
+      var chart = null;
           timer = null;
 
-      d3.selectAll(".controls input").on("change", update);
+      d3.selectAll(".controls input").on("change", updateKnobs);
       d3.select("#source").on("change", updateSource);
+      d3.select("#type").on("change", updateType)
       d3.select("#rewind").on("click", function() {
         numberControl("iterations", 0);
       })
@@ -97,7 +106,7 @@
         d3.select(this).classed("active", timer !== null);
       })
 
-      function update() {
+      function updateKnobs() {
         chart
           .nodeWidth(numberControl("nodeWidth"))
           .nodePadding(numberControl("nodePadding"))
@@ -111,11 +120,19 @@
         });
       }
 
+      function updateType() {
+        var type = d3.select("#type").node().value;
+        d3.select("#chart svg").remove();
+        chart = d3.select("#chart").append("svg").chart(type);
+        updateKnobs();
+        updateSource();
+      }
+
       function numberControl(id, value) {
         var o = d3.select("#"+id);
         if (typeof value !== "undefined") {
           o.node().value = String(value);
-          update();
+          updateKnobs();
         }
         return Number(o.node().value);
       }
@@ -124,13 +141,12 @@
         var o = d3.select("#"+id);
         if (typeof value !== "undefined") {
           o.node().checked = value;
-          update();
+          updateKnobs();
         }
         return o.node().checked;
       }
 
-      update();
-      updateSource();
+      updateType();
     </script>
   </body>
 </html>
