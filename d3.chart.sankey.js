@@ -121,15 +121,21 @@ d3.chart("Sankey.Base").extend("Sankey", {
 
       events: {
         "enter": function() {
+          this.on("mouseover", function(e) { chart.trigger("link:mouseover", e); });
+          this.on("mouseout",  function(e) { chart.trigger("link:mouseout",  e); });
+          this.on("click",     function(e) { chart.trigger("link:click",     e); });
+        },
+
+        "merge": function() {
           this
             .attr("d", chart.d3.path)
             .style("stroke", colorLinks)
             .style("stroke-width", function(d) { return Math.max(1, d.dy); })
             .sort(function(a, b) { return b.dy - a.dy; });
+        },
 
-          this.on("mouseover", function(e) { chart.trigger("link:mouseover", e); });
-          this.on("mouseout",  function(e) { chart.trigger("link:mouseout",  e); });
-          this.on("click",     function(e) { chart.trigger("link:click",     e); });
+        "exit": function() {
+          this.remove();
         }
       }
     });
@@ -145,31 +151,41 @@ d3.chart("Sankey.Base").extend("Sankey", {
 
       events: {
         "enter": function() {
+          this.append("rect");
+          this.append("text")
+            .attr("dy", ".35em")
+            .attr("transform", null);
+
+          this.on("mouseover", function(e) { chart.trigger("node:mouseover", e); });
+          this.on("mouseout",  function(e) { chart.trigger("node:mouseout",  e); });
+          this.on("click",     function(e) { chart.trigger("node:click",     e); });
+        },
+
+        "merge": function() {
           this.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
-          this.append("rect")
+          this.select("rect")
             .attr("height", function(d) { return d.dy; })
             .attr("width", chart.features.nodeWidth)
             .style("fill", colorNodes)
             .style("stroke", function(d) { return d3.rgb(colorNodes(d)).darker(2); });
 
-          this.append("text")
-            .attr("x", -6)
-            .attr("y", function(d) { return d.dy / 2; })
-            .attr("dy", ".35em")
-            .attr("text-anchor", "end")
-            .attr("transform", null)
+          this.select("text")
             .text(chart.features.name)
-            .filter(function(d) { return d.x < chart.features.width / 2; })
-              .attr("x", 6 + chart.features.nodeWidth)
-              .attr("text-anchor", "start");
+            .attr("y", function(d) { return d.dy / 2; })
+            .attr("x", function(d) { return hasTextLeft(d) ? (6 + chart.features.nodeWidth) : -6; })
+            .attr("text-anchor", function(d) { return hasTextLeft(d) ? "start" : "end"; });
+        },
 
-          this.on("mouseover", function(e) { chart.trigger("node:mouseover", e); });
-          this.on("mouseout",  function(e) { chart.trigger("node:mouseout",  e); });
-          this.on("click",     function(e) { chart.trigger("node:click",     e); });
+        "exit": function() {
+          this.remove();
         }
       }
     });
+
+    function hasTextLeft(node) {
+      return node.x < chart.features.width / 2;
+    }
 
     function colorNodes(node) {
       if (typeof chart.features.colorNodes === 'function') {
@@ -193,6 +209,8 @@ d3.chart("Sankey.Base").extend("Sankey", {
 
   transform: function(data) {
     var chart = this;
+
+    chart.data = data;
 
     chart.d3.sankey
       .nodes(data.nodes)

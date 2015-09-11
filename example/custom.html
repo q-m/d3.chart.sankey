@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Customizable Sankey Example</title>
+    <script src="../bower_components/d3/d3.js"></script>
+    <script src="../bower_components/d3-plugins-sankey/sankey.js"></script>
+    <script src="../bower_components/d3.chart/d3.chart.js"></script>
+    <script src="../d3.chart.sankey.js"></script>
+    <style>
+      body {
+        width: 960px;
+        margin: auto;
+      }
+
+      #chart {
+        width: 960px;
+        height: 500px;
+        clear: both;
+      }
+
+      .node rect {
+        fill-opacity: .9;
+        shape-rendering: crispEdges;
+      }
+      .node text {
+        text-shadow: 0 1px 0 #fff;
+      }
+
+      .link {
+        fill: none;
+        stroke: #000;
+        stroke-opacity: .2;
+      }
+
+      .control               { float: left; padding: 6px; }
+      .control label         { display: block; }
+      .control input         { width: 2.5em; }
+      .control button        { border: outset 2px; }
+      .control button.active { border: inset 2px; }
+    </style>
+  </head>
+  <body>
+    <h1>Customizable Sankey Diagram</h1>
+
+    <div class="controls">
+      <div class="control">
+        <label for="source">data</label>
+        <select id="source">
+          <option value="data/foo.json">foo.json</option>
+          <option value="data/energy.json">energy.json</option>
+          <option value="data/product.json">product.json</option>
+        </select>
+      </div>
+      <div class="control">
+        <label for="nodeWidth">nodeWidth</label>
+        <input type="number" id="nodeWidth" step="1" value="8" min="0">
+      </div>
+      <div class="control">
+        <label for="nodePadding">nodePadding</label>
+        <input type="number" id="nodePadding" step="1" value="15" min="0">
+      </div>
+      <div class="control">
+        <label for="iterations">iterations</label>
+        <input type="number" id="iterations" step="1" value="32" min="0">
+        <button id="rewind">&laquo;</button>
+        <button id="play">&#9654;</button>
+      </div>
+      <div class="control">
+        <label for="spread">spread</label>
+        <input type="checkbox" id="spread" value="1">
+      </div>
+    </div>
+
+    <div id="chart"></div>
+
+    <p>A Sankey diagram to fiddle with.</p>
+
+    <script>
+      var chart = d3.select("#chart").append("svg").chart("Sankey"),
+          timer = null;
+
+      d3.selectAll(".controls input").on("change", update);
+      d3.select("#source").on("change", updateSource);
+      d3.select("#rewind").on("click", function() {
+        numberControl("iterations", 0);
+      })
+      d3.select("#play").on("click", function() {
+        if (timer !== null) {
+          clearInterval(timer); timer = null;
+        } else {
+          timer = setInterval(function() {
+            numberControl("iterations", numberControl("iterations") + 1);
+            return true;
+          }, 200);
+        }
+        d3.select(this).classed("active", timer !== null);
+      })
+
+      function update() {
+        chart
+          .nodeWidth(numberControl("nodeWidth"))
+          .nodePadding(numberControl("nodePadding"))
+          .iterations(numberControl("iterations"))
+          .spread(checkControl("spread"));
+      }
+
+      function updateSource() {
+        d3.json(d3.select("#source").node().value, function(error, json) {
+          chart.draw(json);
+        });
+      }
+
+      function numberControl(id, value) {
+        var o = d3.select("#"+id);
+        if (typeof value !== "undefined") {
+          o.node().value = String(value);
+          update();
+        }
+        return Number(o.node().value);
+      }
+
+      function checkControl(id, value) {
+        var o = d3.select("#"+id);
+        if (typeof value !== "undefined") {
+          o.node().checked = value;
+          update();
+        }
+        return o.node().checked;
+      }
+
+      update();
+      updateSource();
+    </script>
+  </body>
+</html>
