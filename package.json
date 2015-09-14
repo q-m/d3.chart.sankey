@@ -31,6 +31,7 @@
 
   "dependencies": {
     "d3": "3",
+    "d3.chart": "0.2",
     "d3-plugins-sankey": "1.2.1"
   },
 
