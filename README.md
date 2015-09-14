@@ -54,6 +54,15 @@ chart.on('node:click', function(node) {
 });
 ```
 
+### Chart types
+
+There are three chart types: `Sankey`, `Sankey.Selection` and `Sankey.Path`.
+The last two charts add the notion of a selection, which is set on mouseover
+when hovering a node or path, or when the `selection` method is called on the
+chart (which accepts an array of nodes and links). `Sankey.Path` expands the
+selection to connected nodes and links.
+
+
 ## Building
 
 You'll need [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/). To fetch required dependencies, run the following commands from the root of this repository:
