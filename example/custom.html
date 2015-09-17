@@ -38,6 +38,22 @@
       .control input         { width: 2.5em; }
       .control button        { border: outset 2px; }
       .control button.active { border: inset 2px; }
+
+      h3 {
+        margin-bottom: 0;
+      }
+
+      #events {
+        height: 15ex;
+        overflow-y: scroll;
+        color: #444;
+        font-family: monospace;
+        border: 1px solid #eee;
+      }
+      #events span:first-child {
+        width: 10em;
+        display: inline-block;
+      }
     </style>
   </head>
   <body>
@@ -84,6 +100,11 @@
 
     <p>A Sankey diagram to fiddle with.</p>
 
+    <h3>Events</h3>
+    <div id="events">
+      <div><i>Move your mouse over the chart to see events.</i></div>
+    </div>
+
     <script>
       var chart = null;
           timer = null;
@@ -124,6 +145,10 @@
         var type = d3.select("#type").node().value;
         d3.select("#chart svg").remove();
         chart = d3.select("#chart").append("svg").chart(type);
+        ["click", "mouseover", "mouseout"].forEach(function(evt) {
+          chart.on("node:"+evt, function(node) { logEvent("node:"+evt, node.name); });
+          chart.on("link:"+evt, function(link) { logEvent("link:"+evt, link.source.name+" → "+link.target.name); });
+        });
         updateKnobs();
         updateSource();
       }
@@ -144,6 +169,14 @@
           updateKnobs();
         }
         return o.node().checked;
+      }
+
+      function logEvent(name, s) {
+        var e = d3.select("#events"),
+            l = e.append("div");
+        l.append("span").text(name);
+        l.append("span").text(s);
+        e.node().scrollTop = e.node().scrollHeight;
       }
 
       updateType();
