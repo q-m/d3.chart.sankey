@@ -131,7 +131,10 @@ d3.chart("Sankey.Base").extend("Sankey", {
       .links(data.links)
       .layout(chart.features.iterations);
 
-    if (this.features.spread) { this._spreadNodes(data); }
+    if (this.features.spread) {
+      this._spreadNodes(data);
+      chart.d3.sankey.relayout();
+    }
 
     return data;
   },
