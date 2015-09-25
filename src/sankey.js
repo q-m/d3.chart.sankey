@@ -192,6 +192,7 @@ d3.chart("Sankey.Base").extend("Sankey", {
           sum = d3.sum(nodes, function(o) { return o.dy; }),
           padding = (chart.features.height - sum) / nodes.length,
           y0 = 0;
+      nodes.sort(function(a, b) { return a.y - b.y; });
       for (i = 0; i < nodes.length; ++i) {
         node = nodes[i];
         node.y = y0;
