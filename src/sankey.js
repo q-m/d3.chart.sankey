@@ -1,12 +1,17 @@
 "use strict";
 /*jshint node: true */
 
-d3.chart("Sankey.Base").extend("Sankey", {
+var d3 = require('d3');
+//var sankey = require('d3-plugins-sankey'); // @todo move loader to config and make it work
+var sankey = require('imports?d3!exports?d3.sankey!d3-plugins-sankey');
+var Base = require('./base');
+
+module.exports = Base.extend("Sankey", {
 
   initialize: function() {
     var chart = this;
 
-    chart.d3.sankey = d3.sankey();
+    chart.d3.sankey = sankey();
     chart.d3.path = chart.d3.sankey.link();
     chart.d3.sankey.size([chart.features.width, chart.features.height]);
 

@@ -1,8 +1,10 @@
 "use strict";
 /*jshint node: true */
 
+var Selection = require('./selection');
+
 // Sankey diagram with a path-hover effect
-d3.chart("Sankey.Selection").extend("Sankey.Path", {
+module.exports = Selection.extend("Sankey.Path", {
 
   selection: function(_) {
     var chart = this;

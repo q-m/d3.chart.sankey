@@ -1,7 +1,11 @@
 "use strict";
 /*jshint node: true */
 
-d3.chart("Sankey.Base", {
+var d3 = require('d3');
+var Chart = require('d3.chart');
+
+/*jshint newcap: false */
+module.exports = Chart("Sankey.Base", {
 
   initialize: function() {
     var chart = this;
@@ -11,8 +15,9 @@ d3.chart("Sankey.Base", {
     chart.d3        = {};
     chart.layers    = {};
 
-    chart.base.attr("width",  chart.base.node().parentNode.clientWidth);
-    chart.base.attr("height", chart.base.node().parentNode.clientHeight);
+    // when using faux-dom, be sure to set the width and height attributes
+    if (!chart.base.attr("width"))  { chart.base.attr("width",  chart.base.node().parentNode.clientWidth);  }
+    if (!chart.base.attr("height")) { chart.base.attr("height", chart.base.node().parentNode.clientHeight); }
 
     // dimensions, with space for node stroke and labels (smallest at bottom)
     chart.features.margins = {top: 1, right: 1, bottom: 6, left: 1};

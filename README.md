@@ -54,6 +54,19 @@ chart.on('node:click', function(node) {
 });
 ```
 
+### AMD, CommonJS, ...
+
+This chart can also be loaded as a module:
+
+```js
+var d3 = require('d3');
+var Sankey = require('d3.chart.sankey');
+
+var g = d3.select('svg').append('g');
+var chart = new Sankey(g);
+```
+
+
 ### Chart types
 
 There are three chart types: `Sankey`, `Sankey.Selection` and `Sankey.Path`.
@@ -61,6 +74,9 @@ The last two charts add the notion of a selection, which is set on mouseover
 when hovering a node or path, or when the `selection` method is called on the
 chart (which accepts an array of nodes and links). `Sankey.Path` expands the
 selection to connected nodes and links.
+
+When loading as a module, you can also access these charts as properties, so
+instead of `new Sankey(g)` you'd use `new Sankey.Selection(g)`;
 
 
 ## Building

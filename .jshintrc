@@ -1,0 +1,6 @@
+{
+  "curly": true,
+  "unused": true,
+  "undef": true,
+  "trailing": false
+}

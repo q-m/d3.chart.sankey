@@ -1,9 +1,9 @@
 {
   "name": "d3.chart.sankey",
   "description": "Reusable D3 Sankey diagram using d3.Chart",
-  "version": "0.1.0",
+  "version": "0.1.1",
 
-  "main": "./d3.chart.sankey.js",
+  "main": "d3.chart.sankey.js",
   "license": "MIT",
 
   "ignore": [
@@ -35,7 +35,7 @@
   "dependencies": {
     "d3": "~3.5.6",
     "d3-plugins-sankey": "1.0.0",
-    "d3.chart": "0.2.1"
+    "d3.chart": "jugglinmike/d3.chart#amd-3"
   },
   "resolutions": {
     "d3": "~3.5.6"

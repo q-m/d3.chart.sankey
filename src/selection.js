@@ -1,8 +1,10 @@
 "use strict";
 /*jshint node: true */
 
+var Sankey = require('./sankey');
+
 // Sankey diagram with a hoverable selection
-d3.chart("Sankey").extend("Sankey.Selection", {
+module.exports = Sankey.extend("Sankey.Selection", {
 
   initialize: function() {
     var chart = this;
