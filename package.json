@@ -1,7 +1,7 @@
 {
   "name": "d3.chart.sankey",
   "description": "Reusable D3 Sankey diagram using d3.Chart",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "main": "d3.chart.sankey",
   "license": "MIT",
   "keywords": [
