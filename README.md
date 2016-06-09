@@ -62,8 +62,8 @@ This chart can also be loaded as a module:
 var d3 = require('d3');
 var Sankey = require('d3.chart.sankey');
 
-var g = d3.select('svg').append('g');
-var chart = new Sankey(g);
+var svg = d3.select('svg');
+var chart = new Sankey(svg);
 ```
 
 
