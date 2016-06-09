@@ -1,6 +1,8 @@
 d3.chart.sankey
 ===============
 
+[![npm version](https://badge.fury.io/js/d3.chart.sankey.svg)](https://badge.fury.io/js/d3.chart.sankey)
+
 Reusable [D3](http://d3js.org/) Sankey [diagram](https://www.npmjs.com/package/d3-plugins-sankey)
 using [d3.Chart](http://misoproject.com/d3-chart/).
 
