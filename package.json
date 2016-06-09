@@ -43,6 +43,6 @@
     "webpack-dev-server": "^1.12.0"
   },
   "d3.chart": {
-    "version": "0.2.1"
+    "version": "0.3.0"
   }
 }
