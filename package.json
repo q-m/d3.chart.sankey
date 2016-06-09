@@ -25,7 +25,7 @@
   "dependencies": {
     "d3": "3",
     "d3.chart": "~0.3.0",
-    "d3-plugins-sankey": "1.2.1"
+    "d3-plugins-sankey": "~1.2.1"
   },
   "devDependencies": {
     "exports-loader": "^0.6.2",
