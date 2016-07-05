@@ -1,7 +1,7 @@
 {
    "nodes" : [
       {
-         "name" : "Total",
+         "name" : "",
          "id" : "final_score"
       },
       {

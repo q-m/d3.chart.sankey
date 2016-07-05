@@ -41,7 +41,9 @@ chart
   .colorNodes(d3.chart.category20c())                 // ... or a color scale
   .colorNodes(function(name, node) { return 'red'; }) // ... or a function
   .colorLinks('yellow')                               // color for labels
-  .colorLinks(function(link) { /* ... */ });          // ... or a function
+  .colorLinks(function(link) { /* ... */ })           // ... or a function
+  .alignLabel('start')                                // align node labels: start, end, auto
+  .alignLabel((n) => n.x > 100 ? 'end' : 'start');    // ... or a function
 ```
 
 The _spread_ option does not exist in D3's Sankey plugin and can make some
