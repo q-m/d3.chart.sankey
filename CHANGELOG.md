@@ -1,6 +1,6 @@
 # d3.chart.sankey change log
 
-## 0.2.1
+## 0.2.1 (2016-07-05)
 
 * Add text align option
 

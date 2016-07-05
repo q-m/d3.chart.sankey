@@ -1,7 +1,7 @@
 /*!
- * d3.chart.sankey - v0.2.0
+ * d3.chart.sankey - v0.2.1
  * License: MIT
- * Date: 2016-00-25
+ * Date: 2016-06-05
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -97,6 +97,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    chart.features.iterations = 32;
 	    chart.features.nodeWidth = chart.d3.sankey.nodeWidth();
 	    chart.features.nodePadding = chart.d3.sankey.nodePadding();
+	    chart.features.alignLabel = 'auto';
 
 	    chart.layers.links = chart.layers.base.append("g").classed("links", true);
 	    chart.layers.nodes = chart.layers.base.append("g").classed("nodes", true);
@@ -170,8 +171,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	          this.select("text")
 	            .text(chart.features.name)
 	            .attr("y", function(d) { return d.dy / 2; })
-	            .attr("x", function(d) { return hasTextLeft(d) ? (6 + chart.features.nodeWidth) : -6; })
-	            .attr("text-anchor", function(d) { return hasTextLeft(d) ? "start" : "end"; });
+	            .attr("x", function(d) { return textAnchor(d) === 'start' ? (6 + chart.features.nodeWidth) : -6; })
+	            .attr("text-anchor", textAnchor);
 	        },
 
 	        "exit": function() {
@@ -180,8 +181,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	      }
 	    });
 
-	    function hasTextLeft(node) {
-	      return node.x < chart.features.width / 2;
+	    function textAnchor(node) {
+	      var align = chart.features.alignLabel;
+	      if (typeof(align) === 'function') {
+	        align = align(node);
+	      }
+	      if (align === 'auto') {
+	        align = node.x < chart.features.width / 2 ? 'start' : 'end';
+	      }
+	      return align;
 	    }
 
 	    function colorNodes(node) {
@@ -258,6 +266,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	  spread: function(_) {
 	    if (!arguments.length) { return this.features.spread; }
 	    this.features.spread = _;
+
+	    if (this.data) { this.draw(this.data); }
+
+	    return this;
+	  },
+
+
+
+	  alignLabel: function(_) {
+	    if (!arguments.length) { return this.features.alignLabel; }
+	    this.features.alignLabel = _;
 
 	    if (this.data) { this.draw(this.data); }
 
