@@ -144,7 +144,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	      },
 
 	      insert: function() {
-	        return this.append("g").classed("node", true);
+	        return this.append("g").classed("node", true).attr('data-node-id', function(d) {
+	          return d.id;
+	        });
 	      },
 
 	      events: {
