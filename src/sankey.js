@@ -66,7 +66,9 @@ module.exports = Base.extend("Sankey", {
       },
 
       insert: function() {
-        return this.append("g").classed("node", true);
+        return this.append("g").classed("node", true).attr('data-node-id', function(d) {
+          return d.id;
+        });
       },
 
       events: {
