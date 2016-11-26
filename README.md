@@ -85,6 +85,28 @@ When loading as a module, you can also access these charts as properties, so
 instead of `new Sankey(g)` you'd use `new Sankey.Selection(g)`;
 
 
+### Special theming
+
+If you add a property to a node object named "id", d3.chart.sankey will add an
+HTML attribute named "data-node-id" with the value of the "id" property to the
+node's `<g>` tag.
+
+This allows CSS and non-D3 JavaScript code to target the node with a selector.
+For example, in CSS:
+
+```
+[data-node-id="some-id"] rect {
+  fill: red;
+}
+```
+
+... or in JavaScript...
+
+```
+document.querySelectorAll('[data-node-id="some-id"]');
+```
+
+
 ## Building
 
 You'll need [Node.js](http://nodejs.org/), [Grunt](http://gruntjs.com/) and [Bower](http://bower.io/). To fetch required dependencies, run the following commands from the root of this repository:
