@@ -1,7 +1,7 @@
 /*!
- * d3.chart.sankey - v0.2.1
+ * d3.chart.sankey - v0.3.0
  * License: MIT
- * Date: 2016-06-05
+ * Date: 2016-11-14
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -80,233 +80,233 @@ return /******/ (function(modules) { // webpackBootstrap
 	/*jshint node: true */
 
 	var d3 = __webpack_require__(2);
-	//var sankey = require('d3-plugins-sankey'); // @todo move loader to config and make it work
+	//var sankey = require("d3-plugins-sankey"); // @todo move loader to config and make it work
 	var sankey = __webpack_require__(3);
 	var Base = __webpack_require__(4);
 
 	module.exports = Base.extend("Sankey", {
 
-	  initialize: function() {
-	    var chart = this;
+		initialize: function() {
+			var chart = this;
 
-	    chart.d3.sankey = sankey();
-	    chart.d3.path = chart.d3.sankey.link();
-	    chart.d3.sankey.size([chart.features.width, chart.features.height]);
+			chart.d3.sankey = sankey();
+			chart.d3.path = chart.d3.sankey.link();
+			chart.d3.sankey.size([chart.features.width, chart.features.height]);
 
-	    chart.features.spread = false;
-	    chart.features.iterations = 32;
-	    chart.features.nodeWidth = chart.d3.sankey.nodeWidth();
-	    chart.features.nodePadding = chart.d3.sankey.nodePadding();
-	    chart.features.alignLabel = 'auto';
+			chart.features.spread = false;
+			chart.features.iterations = 32;
+			chart.features.nodeWidth = chart.d3.sankey.nodeWidth();
+			chart.features.nodePadding = chart.d3.sankey.nodePadding();
+			chart.features.alignLabel = "auto";
 
-	    chart.layers.links = chart.layers.base.append("g").classed("links", true);
-	    chart.layers.nodes = chart.layers.base.append("g").classed("nodes", true);
-
-
-	    chart.on("change:sizes", function() {
-	      chart.d3.sankey.nodeWidth(chart.features.nodeWidth);
-	      chart.d3.sankey.nodePadding(chart.features.nodePadding);
-	    });
-
-	    chart.layer("links", chart.layers.links, {
-	      dataBind: function(data) {
-	        return this.selectAll(".link").data(data.links);
-	      },
-
-	      insert: function() {
-	        return this.append("path").classed("link", true);
-	      },
-
-	      events: {
-	        "enter": function() {
-	          this.on("mouseover", function(e) { chart.trigger("link:mouseover", e); });
-	          this.on("mouseout",  function(e) { chart.trigger("link:mouseout",  e); });
-	          this.on("click",     function(e) { chart.trigger("link:click",     e); });
-	        },
-
-	        "merge": function() {
-	          this
-	            .attr("d", chart.d3.path)
-	            .style("stroke", colorLinks)
-	            .style("stroke-width", function(d) { return Math.max(1, d.dy); })
-	            .sort(function(a, b) { return b.dy - a.dy; });
-	        },
-
-	        "exit": function() {
-	          this.remove();
-	        }
-	      }
-	    });
-
-	    chart.layer("nodes", chart.layers.nodes, {
-	      dataBind: function(data) {
-	        return this.selectAll(".node").data(data.nodes);
-	      },
-
-	      insert: function() {
-	        return this.append("g").classed("node", true).attr('data-node-id', function(d) {
-	          return d.id;
-	        });
-	      },
-
-	      events: {
-	        "enter": function() {
-	          this.append("rect");
-	          this.append("text")
-	            .attr("dy", ".35em")
-	            .attr("transform", null);
-
-	          this.on("mouseover", function(e) { chart.trigger("node:mouseover", e); });
-	          this.on("mouseout",  function(e) { chart.trigger("node:mouseout",  e); });
-	          this.on("click",     function(e) { chart.trigger("node:click",     e); });
-	        },
-
-	        "merge": function() {
-	          this.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-
-	          this.select("rect")
-	            .attr("height", function(d) { return d.dy; })
-	            .attr("width", chart.features.nodeWidth)
-	            .style("fill", colorNodes)
-	            .style("stroke", function(d) { return d3.rgb(colorNodes(d)).darker(2); });
-
-	          this.select("text")
-	            .text(chart.features.name)
-	            .attr("y", function(d) { return d.dy / 2; })
-	            .attr("x", function(d) { return textAnchor(d) === 'start' ? (6 + chart.features.nodeWidth) : -6; })
-	            .attr("text-anchor", textAnchor);
-	        },
-
-	        "exit": function() {
-	          this.remove();
-	        }
-	      }
-	    });
-
-	    function textAnchor(node) {
-	      var align = chart.features.alignLabel;
-	      if (typeof(align) === 'function') {
-	        align = align(node);
-	      }
-	      if (align === 'auto') {
-	        align = node.x < chart.features.width / 2 ? 'start' : 'end';
-	      }
-	      return align;
-	    }
-
-	    function colorNodes(node) {
-	      if (typeof chart.features.colorNodes === 'function') {
-	        // allow using d3 scales, but also custom function with node as 2nd argument
-	        return chart.features.colorNodes(chart.features.name(node), node);
-	      } else {
-	        return chart.features.colorNodes;
-	      }
-	    }
-
-	    function colorLinks(link) {
-	      if (typeof chart.features.colorLinks === 'function') {
-	        // always expect custom function, there's no sensible default with d3 scales here
-	        return chart.features.colorLinks(link);
-	      } else {
-	        return chart.features.colorLinks;
-	      }
-	    }
-	  },
+			chart.layers.links = chart.layers.base.append("g").classed("links", true);
+			chart.layers.nodes = chart.layers.base.append("g").classed("nodes", true);
 
 
-	  transform: function(data) {
-	    var chart = this;
+			chart.on("change:sizes", function() {
+				chart.d3.sankey.nodeWidth(chart.features.nodeWidth);
+				chart.d3.sankey.nodePadding(chart.features.nodePadding);
+			});
 
-	    chart.data = data;
+			chart.layer("links", chart.layers.links, {
+				dataBind: function(data) {
+					return this.selectAll(".link").data(data.links);
+				},
 
-	    chart.d3.sankey
-	      .nodes(data.nodes)
-	      .links(data.links)
-	      .layout(chart.features.iterations);
+				insert: function() {
+					return this.append("path").classed("link", true);
+				},
 
-	    if (this.features.spread) {
-	      this._spreadNodes(data);
-	      chart.d3.sankey.relayout();
-	    }
+				events: {
+					"enter": function() {
+						this.on("mouseover",  function(e) { chart.trigger("link:mouseover", e); });
+						this.on("mouseout",   function(e) { chart.trigger("link:mouseout",  e); });
+						this.on("click",      function(e) { chart.trigger("link:click",     e); });
+					},
 
-	    return data;
-	  },
+					"merge": function() {
+						this
+							.attr("d", chart.d3.path)
+							.style("stroke", colorLinks)
+							.style("stroke-width", function(d) { return Math.max(1, d.dy); })
+							.sort(function(a, b) { return b.dy - a.dy; });
+					},
+
+					"exit": function() {
+						this.remove();
+					}
+				}
+			});
+
+			chart.layer("nodes", chart.layers.nodes, {
+				dataBind: function(data) {
+					return this.selectAll(".node").data(data.nodes);
+				},
+
+				insert: function() {
+					return this.append("g").classed("node", true).attr("data-node-id", function(d) {
+						return d.id;
+					});
+				},
+
+				events: {
+					"enter": function() {
+						this.append("rect");
+						this.append("text")
+							.attr("dy", ".35em")
+							.attr("transform", null);
+
+						this.on("mouseover",  function(e) { chart.trigger("node:mouseover", e); });
+						this.on("mouseout",   function(e) { chart.trigger("node:mouseout",  e); });
+						this.on("click",      function(e) { chart.trigger("node:click",     e); });
+					},
+
+					"merge": function() {
+						this.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+
+						this.select("rect")
+							.attr("height", function(d) { return d.dy; })
+							.attr("width", chart.features.nodeWidth)
+							.style("fill", colorNodes)
+							.style("stroke", function(d) { return d3.rgb(colorNodes(d)).darker(2); });
+
+						this.select("text")
+							.text(chart.features.name)
+							.attr("y", function(d) { return d.dy / 2; })
+							.attr("x", function(d) { return textAnchor(d) === "start" ? (6 + chart.features.nodeWidth) : -6; })
+							.attr("text-anchor", textAnchor);
+					},
+
+					"exit": function() {
+						this.remove();
+					}
+				}
+			});
+
+			function textAnchor(node) {
+				var align = chart.features.alignLabel;
+				if (typeof(align) === "function") {
+					align = align(node);
+				}
+				if (align === "auto") {
+					align = node.x < chart.features.width / 2 ? "start" : "end";
+				}
+				return align;
+			}
+
+			function colorNodes(node) {
+				if (typeof chart.features.colorNodes === "function") {
+					// allow using d3 scales, but also custom function with node as 2nd argument
+					return chart.features.colorNodes(chart.features.name(node), node);
+				} else {
+					return chart.features.colorNodes;
+				}
+			}
+
+			function colorLinks(link) {
+				if (typeof chart.features.colorLinks === "function") {
+					// always expect custom function, there"s no sensible default with d3 scales here
+					return chart.features.colorLinks(link);
+				} else {
+					return chart.features.colorLinks;
+				}
+			}
+		},
 
 
-	  iterations: function(_) {
-	    if (!arguments.length) { return this.features.iterations; }
-	    this.features.iterations = _;
+		transform: function(data) {
+			var chart = this;
 
-	    if (this.data) { this.draw(this.data); }
+			chart.data = data;
 
-	    return this;
-	  },
+			chart.d3.sankey
+				.nodes(data.nodes)
+				.links(data.links)
+				.layout(chart.features.iterations);
 
+			if (this.features.spread) {
+				this._spreadNodes(data);
+				chart.d3.sankey.relayout();
+			}
 
-	  nodeWidth: function(_) {
-	    if (!arguments.length) { return this.features.nodeWidth; }
-	    this.features.nodeWidth = _;
-
-	    this.trigger("change:sizes");
-	    if (this.data) { this.draw(this.data); }
-
-	    return this;
-	  },
+			return data;
+		},
 
 
-	  nodePadding: function(_) {
-	    if (!arguments.length) { return this.features.nodePadding; }
-	    this.features.nodePadding = _;
+		iterations: function(_) {
+			if (!arguments.length) { return this.features.iterations; }
+			this.features.iterations = _;
 
-	    this.trigger("change:sizes");
-	    if (this.data) { this.draw(this.data); }
+			if (this.data) { this.draw(this.data); }
 
-	    return this;
-	  },
-
-
-	  spread: function(_) {
-	    if (!arguments.length) { return this.features.spread; }
-	    this.features.spread = _;
-
-	    if (this.data) { this.draw(this.data); }
-
-	    return this;
-	  },
+			return this;
+		},
 
 
+		nodeWidth: function(_) {
+			if (!arguments.length) { return this.features.nodeWidth; }
+			this.features.nodeWidth = _;
 
-	  alignLabel: function(_) {
-	    if (!arguments.length) { return this.features.alignLabel; }
-	    this.features.alignLabel = _;
+			this.trigger("change:sizes");
+			if (this.data) { this.draw(this.data); }
 
-	    if (this.data) { this.draw(this.data); }
-
-	    return this;
-	  },
+			return this;
+		},
 
 
-	  _spreadNodes: function(data) {
-	    var chart = this,
-	        nodesByBreadth = d3.nest()
-	        .key(function(d) { return d.x; })
-	        .entries(data.nodes)
-	        .map(function(d) { return d.values; });
+		nodePadding: function(_) {
+			if (!arguments.length) { return this.features.nodePadding; }
+			this.features.nodePadding = _;
 
-	    nodesByBreadth.forEach(function(nodes) {
-	      var i,
-	          node,
-	          sum = d3.sum(nodes, function(o) { return o.dy; }),
-	          padding = (chart.features.height - sum) / nodes.length,
-	          y0 = 0;
-	      nodes.sort(function(a, b) { return a.y - b.y; });
-	      for (i = 0; i < nodes.length; ++i) {
-	        node = nodes[i];
-	        node.y = y0;
-	        y0 += node.dy + padding;
-	      }
-	    });
-	  }
+			this.trigger("change:sizes");
+			if (this.data) { this.draw(this.data); }
+
+			return this;
+		},
+
+
+		spread: function(_) {
+			if (!arguments.length) { return this.features.spread; }
+			this.features.spread = _;
+
+			if (this.data) { this.draw(this.data); }
+
+			return this;
+		},
+
+
+
+		alignLabel: function(_) {
+			if (!arguments.length) { return this.features.alignLabel; }
+			this.features.alignLabel = _;
+
+			if (this.data) { this.draw(this.data); }
+
+			return this;
+		},
+
+
+		_spreadNodes: function(data) {
+			var chart = this,
+					nodesByBreadth = d3.nest()
+					.key(function(d) { return d.x; })
+					.entries(data.nodes)
+					.map(function(d) { return d.values; });
+
+			nodesByBreadth.forEach(function(nodes) {
+				var i,
+						node,
+						sum = d3.sum(nodes, function(o) { return o.dy; }),
+						padding = (chart.features.height - sum) / nodes.length,
+						y0 = 0;
+				nodes.sort(function(a, b) { return a.y - b.y; });
+				for (i = 0; i < nodes.length; ++i) {
+					node = nodes[i];
+					node.y = y0;
+					y0 += node.dy + padding;
+				}
+			});
+		}
 
 	});
 
@@ -618,7 +618,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	};
 
 	/*** EXPORTS FROM exports-loader ***/
-	module.exports = d3.sankey
+	module.exports = d3.sankey;
 
 
 /***/ },
@@ -634,64 +634,64 @@ return /******/ (function(modules) { // webpackBootstrap
 	/*jshint newcap: false */
 	module.exports = Chart("Sankey.Base", {
 
-	  initialize: function() {
-	    var chart = this;
+		initialize: function() {
+			var chart = this;
 
-	    // Inspired by d3.chart.layout.hierarchy's hierarchy.js, though also different
-	    chart.features  = {};
-	    chart.d3        = {};
-	    chart.layers    = {};
+			// Inspired by d3.chart.layout.hierarchy's hierarchy.js, though also different
+			chart.features	= {};
+			chart.d3				= {};
+			chart.layers		= {};
 
-	    // when using faux-dom, be sure to set the width and height attributes
-	    if (!chart.base.attr("width"))  { chart.base.attr("width",  chart.base.node().parentNode.clientWidth);  }
-	    if (!chart.base.attr("height")) { chart.base.attr("height", chart.base.node().parentNode.clientHeight); }
+			// when using faux-dom, be sure to set the width and height attributes
+			if (!chart.base.attr("width"))	{ chart.base.attr("width",	chart.base.node().parentNode.clientWidth);	}
+			if (!chart.base.attr("height")) { chart.base.attr("height", chart.base.node().parentNode.clientHeight); }
 
-	    // dimensions, with space for node stroke and labels (smallest at bottom)
-	    chart.features.margins = {top: 1, right: 1, bottom: 6, left: 1};
-	    chart.features.width   = chart.base.attr("width") - chart.features.margins.left - chart.features.margins.right;
-	    chart.features.height  = chart.base.attr("height") - chart.features.margins.top - chart.features.margins.bottom;
+			// dimensions, with space for node stroke and labels (smallest at bottom)
+			chart.features.margins  = {top: 1, right: 1, bottom: 6, left: 1};
+			chart.features.width    = chart.base.attr("width") - chart.features.margins.left - chart.features.margins.right;
+			chart.features.height   = chart.base.attr("height") - chart.features.margins.top - chart.features.margins.bottom;
 
-	    chart.features.name    = function(d) { return d.name; };
-	    // there is no value property, because we also need to set it on parents
-	    chart.features.colorNodes = d3.scale.category20c();
-	    chart.features.colorLinks = null; // css styles by default
+			chart.features.name     = function(d) { return d.name; };
+			// there is no value property, because we also need to set it on parents
+			chart.features.colorNodes = d3.scale.category20c();
+			chart.features.colorLinks = null; // css styles by default
 
-	    chart.layers.base = chart.base.append("g")
-	      .attr("transform", "translate(" + chart.features.margins.left + "," + chart.features.margins.top + ")");
-	  },
-
-
-	  name: function(_) {
-	    if (!arguments.length) { return this.features.name; }
-	    this.features.name = _;
-
-	    this.trigger("change:name");
-	    if (this.root) { this.draw(this.root); }
-
-	    return this;
-	  },
+			chart.layers.base = chart.base.append("g")
+				.attr("transform", "translate(" + chart.features.margins.left + "," + chart.features.margins.top + ")");
+		},
 
 
-	  colorNodes: function(_) {
-	    if (!arguments.length) { return this.features.colorNodes; }
-	    this.features.colorNodes = _;
+		name: function(_) {
+			if (!arguments.length) { return this.features.name; }
+			this.features.name = _;
 
-	    this.trigger("change:color");
-	    if (this.root) { this.draw(this.root); }
+			this.trigger("change:name");
+			if (this.root) { this.draw(this.root); }
 
-	    return this;
-	  },
+			return this;
+		},
 
 
-	  colorLinks: function(_) {
-	    if (!arguments.length) { return this.features.colorLinks; }
-	    this.features.colorLinks = _;
+		colorNodes: function(_) {
+			if (!arguments.length) { return this.features.colorNodes; }
+			this.features.colorNodes = _;
 
-	    this.trigger("change:color");
-	    if (this.data) { this.draw(this.data); }
+			this.trigger("change:color");
+			if (this.root) { this.draw(this.root); }
 
-	    return this;
-	  }
+			return this;
+		},
+
+
+		colorLinks: function(_) {
+			if (!arguments.length) { return this.features.colorLinks; }
+			this.features.colorLinks = _;
+
+			this.trigger("change:color");
+			if (this.data) { this.draw(this.data); }
+
+			return this;
+		}
 
 	});
 
@@ -714,61 +714,61 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Sankey diagram with a hoverable selection
 	module.exports = Sankey.extend("Sankey.Selection", {
 
-	  initialize: function() {
-	    var chart = this;
+		initialize: function() {
+			var chart = this;
 
-	    chart.features.selection = null;
-	    chart.features.unselectedOpacity = 0.2;
+			chart.features.selection = null;
+			chart.features.unselectedOpacity = 0.2;
 
-	    chart.on("link:mouseover", chart.selection);
-	    chart.on("link:mouseout", function() { chart.selection(null); });
-	    chart.on("node:mouseover", chart.selection);
-	    chart.on("node:mouseout", function() { chart.selection(null); });
+			chart.on("link:mouseover", chart.selection);
+			chart.on("link:mouseout", function() { chart.selection(null); });
+			chart.on("node:mouseover", chart.selection);
+			chart.on("node:mouseout", function() { chart.selection(null); });
 
-	    // going through the whole draw cycle can be a little slow, so we use
-	    // a selection changed event to update existing nodes directly
-	    chart.on("change:selection", updateTransition);
-	    this.layer("links").on("enter", update);
-	    this.layer("nodes").on("enter", update);
+			// going through the whole draw cycle can be a little slow, so we use
+			// a selection changed event to update existing nodes directly
+			chart.on("change:selection", updateTransition);
+			this.layer("links").on("enter", update);
+			this.layer("nodes").on("enter", update);
 
-	    function update() {
-	      /*jshint validthis:true */
-	      if (chart.features.selection && chart.features.selection.length) {
-	        return this.style("opacity", function(o) {
-	          return chart.features.selection.indexOf(o) >= 0 ? 1 : chart.features.unselectedOpacity;
-	        });
-	      } else {
-	        return this.style("opacity", 1);
-	      }
-	    }
+			function update() {
+				/*jshint validthis:true */
+				if (chart.features.selection && chart.features.selection.length) {
+					return this.style("opacity", function(o) {
+						return chart.features.selection.indexOf(o) >= 0 ? 1 : chart.features.unselectedOpacity;
+					});
+				} else {
+					return this.style("opacity", 1);
+				}
+			}
 
-	    function updateTransition() {
-	      var transition = chart.layers.base.selectAll('.node, .link').transition();
-	      if (!chart.features.selection || !chart.features.selection.length) {
-	        // short delay for the deselect transition to avoid flicker
-	        transition = transition.delay(100);
-	      }
-	      update.apply(transition.duration(50));
-	    }
-	  },
+			function updateTransition() {
+				var transition = chart.layers.base.selectAll(".node, .link").transition();
+				if (!chart.features.selection || !chart.features.selection.length) {
+					// short delay for the deselect transition to avoid flicker
+					transition = transition.delay(100);
+				}
+				update.apply(transition.duration(50));
+			}
+		},
 
-	  selection: function(_) {
-	    if (!arguments.length) { return this.features.selection; }
-	    this.features.selection = (!_ || _ instanceof Array) ? _ : [_];
+		selection: function(_) {
+			if (!arguments.length) { return this.features.selection; }
+			this.features.selection = (!_ || _ instanceof Array) ? _ : [_];
 
-	    this.trigger("change:selection");
+			this.trigger("change:selection");
 
-	    return this;
-	  },
+			return this;
+		},
 
-	  unselectedOpacity: function(_) {
-	    if (!arguments.length) { return this.features.unselectedOpacity; }
-	    this.features.unselectedOpacity = _;
+		unselectedOpacity: function(_) {
+			if (!arguments.length) { return this.features.unselectedOpacity; }
+			this.features.unselectedOpacity = _;
 
-	    this.trigger("change:selection");
+			this.trigger("change:selection");
 
-	    return this;
-	  }
+			return this;
+		}
 
 	});
 
@@ -785,67 +785,67 @@ return /******/ (function(modules) { // webpackBootstrap
 	// Sankey diagram with a path-hover effect
 	module.exports = Selection.extend("Sankey.Path", {
 
-	  selection: function(_) {
-	    var chart = this;
+		selection: function(_) {
+			var chart = this;
 
-	    if (!arguments.length) { return chart.features.selection; }
-	    chart.features.selection = (!_ || _ instanceof Array) ? _ : [_];
+			if (!arguments.length) { return chart.features.selection; }
+			chart.features.selection = (!_ || _ instanceof Array) ? _ : [_];
 
-	    // expand selection with connections
-	    if (chart.features.selection) {
-	      chart.features.selection.forEach(function(o) {
-	        getConnections(o).forEach(function(p) {
-	          chart.features.selection.push(p);
-	        });
-	      });
-	    }
+			// expand selection with connections
+			if (chart.features.selection) {
+				chart.features.selection.forEach(function(o) {
+					getConnections(o).forEach(function(p) {
+						chart.features.selection.push(p);
+					});
+				});
+			}
 
-	    chart.trigger("change:selection");
+			chart.trigger("change:selection");
 
-	    return chart;
-	  }
+			return chart;
+		}
 
 	});
 
 	function getConnections(o, direction) {
-	  if (o.source && o.target) {
-	    return getConnectionsLink(o, direction);
-	  } else {
-	    return getConnectionsNode(o, direction);
-	  }
+		if (o.source && o.target) {
+			return getConnectionsLink(o, direction);
+		} else {
+			return getConnectionsNode(o, direction);
+		}
 	}
 
 	// Return the link and its connected nodes with their links etc.
 	function getConnectionsLink(o, direction) {
-	  var links = [o];
-	  direction = direction || 'both';
+		var links = [o];
+		direction = direction || "both";
 
-	  if (direction == 'source' || direction == 'both') {
-	    links = links.concat(getConnectionsNode(o.source, 'source'));
-	  }
-	  if (direction == 'target' || direction == 'both') {
-	    links = links.concat(getConnectionsNode(o.target, 'target'));
-	  }
+		if (direction == "source" || direction == "both") {
+			links = links.concat(getConnectionsNode(o.source, "source"));
+		}
+		if (direction == "target" || direction == "both") {
+			links = links.concat(getConnectionsNode(o.target, "target"));
+		}
 
-	  return links;
+		return links;
 	}
 
-	// Return the node and its connected links. If direction is 'both', just return
-	// all links; if direction is 'source', only return the source link when there
+	// Return the node and its connected links. If direction is "both", just return
+	// all links; if direction is "source", only return the source link when there
 	// is one target link (or none, in which case the node is an endnode); if
-	// direction is 'target' vice versa. Open the product example to see why.
+	// direction is "target" vice versa. Open the product example to see why.
 	function getConnectionsNode(o, direction) {
-	  var links = [o];
-	  direction = direction || 'both';
+		var links = [o];
+		direction = direction || "both";
 
-	  if ((direction == 'source' && o.sourceLinks.length < 2) || direction == 'both') {
-	    o.targetLinks.forEach(function(p) { links = links.concat(getConnectionsLink(p, direction)); });
-	  }
-	  if ((direction == 'target' && o.targetLinks.length < 2) || direction == 'both') {
-	    o.sourceLinks.forEach(function(p) { links = links.concat(getConnectionsLink(p, direction)); });
-	  }
+		if ((direction == "source" && o.sourceLinks.length < 2) || direction == "both") {
+			o.targetLinks.forEach(function(p) { links = links.concat(getConnectionsLink(p, direction)); });
+		}
+		if ((direction == "target" && o.targetLinks.length < 2) || direction == "both") {
+			o.sourceLinks.forEach(function(p) { links = links.concat(getConnectionsLink(p, direction)); });
+		}
 
-	  return links;
+		return links;
 	}
 
 

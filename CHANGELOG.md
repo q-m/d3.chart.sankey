@@ -1,5 +1,9 @@
 # d3.chart.sankey change log
 
+## 0.3.0 (2016-12-14)
+
+* Add "id" property for special theming (thanks @mparker17)
+
 ## 0.2.1 (2016-07-05)
 
 * Add text align option
