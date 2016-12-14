@@ -94,7 +94,7 @@ node's `<g>` tag.
 This allows CSS and non-D3 JavaScript code to target the node with a selector.
 For example, in CSS:
 
-```
+```css
 [data-node-id="some-id"] rect {
   fill: red;
 }
@@ -102,7 +102,7 @@ For example, in CSS:
 
 ... or in JavaScript...
 
-```
+```js
 document.querySelectorAll('[data-node-id="some-id"]');
 ```
 
