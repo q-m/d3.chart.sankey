@@ -25,13 +25,13 @@ module.exports = {
 		new webpack.BannerPlugin(banner)
 	],
 	externals: {
-		'd3': true,
-		'd3-plugins-sankey': true,
-    'd3.chart': {
-			'root': ['d3', 'chart'],
-			'commonjs': 'd3.chart',
-			'commonjs2': 'd3.chart',
-			'amd': 'd3.chart'
+		"d3": true,
+		"d3-plugins-sankey": true,
+		"d3.chart": {
+			"root": ["d3", "chart"],
+			"commonjs": "d3.chart",
+			"commonjs2": "d3.chart",
+			"amd": "d3.chart"
 		}
 	}
 };
