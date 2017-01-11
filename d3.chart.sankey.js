@@ -122,6 +122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						this.on("mouseover",  function(e) { chart.trigger("link:mouseover", e); });
 						this.on("mouseout",   function(e) { chart.trigger("link:mouseout",  e); });
 						this.on("click",      function(e) { chart.trigger("link:click",     e); });
+						this.on('dblclick',   function(e) { chart.trigger("link:dblclick",  e); });
 					},
 
 					"merge": function() {
@@ -159,6 +160,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						this.on("mouseover",  function(e) { chart.trigger("node:mouseover", e); });
 						this.on("mouseout",   function(e) { chart.trigger("node:mouseout",  e); });
 						this.on("click",      function(e) { chart.trigger("node:click",     e); });
+						this.on("click", 	  function(e) { chart.trigger("node:dblclick",  e); });
 					},
 
 					"merge": function() {
