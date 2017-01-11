@@ -122,7 +122,7 @@ return /******/ (function(modules) { // webpackBootstrap
 						this.on("mouseover",  function(e) { chart.trigger("link:mouseover", e); });
 						this.on("mouseout",   function(e) { chart.trigger("link:mouseout",  e); });
 						this.on("click",      function(e) { chart.trigger("link:click",     e); });
-						this.on('dblclick',   function(e) { chart.trigger("link:dblclick",  e); });
+						this.on("dblclick",   function(e) { chart.trigger("link:dblclick",  e); });
 					},
 
 					"merge": function() {
