@@ -51,8 +51,8 @@ diagrams clearer. When enabled, nodes are distributed over the full height.
 This may work best when the number of iterations is set to zero.
 
 The following events are emitted on the chart:
-`node:mouseover`, `node:mouseout`, `node:click`,
-`link:mouseover`, `link:mouseout`, `link:click`.
+`node:mouseover`, `node:mouseout`, `node:click`, `node:dblclick`,
+`link:mouseover`, `link:mouseout`, `link:click`, `link:dblclick`.
 For example:
 ```js
 chart.on('node:click', function(node) {
