@@ -1,7 +1,7 @@
 /*!
- * d3.chart.sankey - v0.3.0
+ * d3.chart.sankey - v0.4.0
  * License: MIT
- * Date: 2016-11-14
+ * Date: 2017-00-16
  */
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
@@ -122,7 +122,6 @@ return /******/ (function(modules) { // webpackBootstrap
 						this.on("mouseover",  function(e) { chart.trigger("link:mouseover", e); });
 						this.on("mouseout",   function(e) { chart.trigger("link:mouseout",  e); });
 						this.on("click",      function(e) { chart.trigger("link:click",     e); });
-						this.on("dblclick",   function(e) { chart.trigger("link:dblclick",  e); });
 					},
 
 					"merge": function() {
@@ -160,7 +159,6 @@ return /******/ (function(modules) { // webpackBootstrap
 						this.on("mouseover",  function(e) { chart.trigger("node:mouseover", e); });
 						this.on("mouseout",   function(e) { chart.trigger("node:mouseout",  e); });
 						this.on("click",      function(e) { chart.trigger("node:click",     e); });
-						this.on("dblclick",   function(e) { chart.trigger("node:dblclick",  e); });
 					},
 
 					"merge": function() {
