@@ -18,6 +18,7 @@ module.exports = Chart("Sankey.Base", {
 		// when using faux-dom, be sure to set the width and height attributes
 		if (!chart.base.attr("width"))	{ chart.base.attr("width",	chart.base.node().parentNode.clientWidth);	}
 		if (!chart.base.attr("height")) { chart.base.attr("height", chart.base.node().parentNode.clientHeight); }
+		chart.base.attr("role", "graphics-document document");
 
 		// dimensions, with space for node stroke and labels (smallest at bottom)
 		chart.features.margins  = {top: 1, right: 1, bottom: 6, left: 1};

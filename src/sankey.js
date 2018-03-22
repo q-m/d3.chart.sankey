@@ -92,6 +92,7 @@ module.exports = Base.extend("Sankey", {
 					this.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
 					this.select("rect")
+						.attr("role", "graphics-symbol img")
 						.attr("height", function(d) { return d.dy; })
 						.attr("width", chart.features.nodeWidth)
 						.style("fill", colorNodes)
