@@ -66,7 +66,10 @@ module.exports = Base.extend("Sankey", {
 			},
 
 			insert: function() {
-				return this.append("g").classed("node", true).attr("data-node-id", function(d) {
+				return this.append("a").attr("xlink:href", "")
+					.classed("node", true)
+					.attr("aria-labelledby", function(d) { return "d3-sankey-node-" + d.id + "-title";})
+					.attr("data-node-id", function(d) {
 					return d.id;
 				});
 			},
@@ -80,13 +83,16 @@ module.exports = Base.extend("Sankey", {
 
 					this.on("mouseover",  function(e) { chart.trigger("node:mouseover", e); });
 					this.on("mouseout",   function(e) { chart.trigger("node:mouseout",  e); });
-					this.on("click",      function(e) { chart.trigger("node:click",     e); });
+					this.on("click",      function(e) { d3.event.preventDefault(); chart.trigger("node:click",     e); });
+					this.on("focus",  function(e) { chart.trigger("node:focus", e); });
+					this.on("blur",   function(e) { chart.trigger("node:blur",  e); });
 				},
 
 				"merge": function() {
 					this.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
 
 					this.select("rect")
+						.attr("role", "graphics-symbol img")
 						.attr("height", function(d) { return d.dy; })
 						.attr("width", chart.features.nodeWidth)
 						.style("fill", colorNodes)
@@ -94,6 +100,7 @@ module.exports = Base.extend("Sankey", {
 
 					this.select("text")
 						.text(chart.features.name)
+						.attr("id", function(d) { return "d3-sankey-node-" + d.id + "-title"; })
 						.attr("y", function(d) { return d.dy / 2; })
 						.attr("x", function(d) { return textAnchor(d) === "start" ? (6 + chart.features.nodeWidth) : -6; })
 						.attr("text-anchor", textAnchor);
